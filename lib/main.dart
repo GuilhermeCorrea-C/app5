@@ -44,13 +44,35 @@ class MyHomePage extends StatelessWidget {
       body: Column(
         children: [
           Text('A random COEEEEE idea:'),
-          Text(pair.asLowerCase),
+          BigCard(appState: appState),
           ElevatedButton(
               onPressed: () {
                 appState.getNext();
               },
               child: Text('olá')),
         ],
+      ),
+    );
+  }
+}
+
+class BigCard extends StatelessWidget {
+  const BigCard({
+    super.key,
+    required this.appState,
+  });
+
+  final MyAppState appState;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Card(
+      color: theme.colorScheme.primary,
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Text(appState.current.asLowerCase),
       ),
     );
   }
