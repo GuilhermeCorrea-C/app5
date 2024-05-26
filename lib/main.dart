@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         title: 'Namer App',
         theme: ThemeData(
           useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
         ),
         home: MyHomePage(),
       ),
@@ -45,15 +45,15 @@ class MyAppState extends ChangeNotifier {
   }
 }
 
-
 class MyHomePage extends StatefulWidget {
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-var selectedIndex = 0;
-@override
+  var selectedIndex = 0;
+
+  @override
   Widget build(BuildContext context) {
     Widget page;
     switch (selectedIndex) {
@@ -67,10 +67,9 @@ var selectedIndex = 0;
         throw UnimplementedError('no widget for $selectedIndex');
     }
 
-
-return LayoutBuilder(
-  builder: (context, constraints) {
-    return Scaffold(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Scaffold(
           body: Row(
             children: [
               SafeArea(
@@ -79,11 +78,11 @@ return LayoutBuilder(
                   destinations: [
                     NavigationRailDestination(
                       icon: Icon(Icons.home),
-                      label: Text('Início'),
+                      label: Text('Home'),
                     ),
                     NavigationRailDestination(
                       icon: Icon(Icons.favorite),
-                      label: Text('Favoritos'),
+                      label: Text('Favorites'),
                     ),
                   ],
                   selectedIndex: selectedIndex,
@@ -103,8 +102,8 @@ return LayoutBuilder(
             ],
           ),
         );
-  }
-);
+      },
+    );
   }
 }
 
@@ -125,6 +124,11 @@ class GeneratorPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Text(
+            'Bem-vindo ao Namer App!',
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+          SizedBox(height: 20),
           BigCard(appState: appState),
           SizedBox(height: 10),
           Row(
@@ -188,7 +192,7 @@ class FavoritesPage extends StatelessWidget {
 
     if (appState.favorites.isEmpty) {
       return Center(
-        child: Text('Ainda não possui favortios.'),
+        child: Text('Sem favoritos ainda.'),
       );
     }
 
